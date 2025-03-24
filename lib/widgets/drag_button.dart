@@ -2,7 +2,24 @@ import 'package:etoken/assets/colors/color.dart';
 import 'package:flutter/material.dart';
 
 class DragButton extends StatefulWidget {
-  const DragButton({super.key});
+  final String initialImagePath;
+  final String finalImagePath;
+  final String initialText;
+  final String finalText;
+  final Color initialColor;
+  final Color finalColor;
+  final Function(double dx)? onHorizontalDragUpdate;
+
+  const DragButton({
+    super.key,
+    required this.initialImagePath,
+    required this.finalImagePath,
+    required this.initialText,
+    required this.finalText,
+    this.initialColor = blue,
+    this.finalColor = Colors.white,
+    this.onHorizontalDragUpdate
+  });
 
   @override
   State<StatefulWidget> createState() => _DragButtonState();
@@ -21,6 +38,9 @@ class _DragButtonState extends State<DragButton>
   final int _animationFactorOne = 1;
   final double _multiplierFactorThree = 3.5;
   final double _multiplierFactorOne = 1.5;
+
+  _DragButtonState();
+
   double get _dragThreshold =>
       _containerWidth - _circleDiameter - (_paddingSize * 2);
 
@@ -49,14 +69,14 @@ class _DragButtonState extends State<DragButton>
   Widget build(BuildContext context) {
     double buttonHeight =
         _containerHeight -
-        (((_containerHeight - _circleDiameter) / _positionThreshold) *
-            _position);
+            (((_containerHeight - _circleDiameter) / _positionThreshold) *
+                _position);
 
     double buttonWidth =
         _containerWidth -
-        ((((_containerWidth + (_paddingSize * 2)) - _containerWidth) /
+            ((((_containerWidth + (_paddingSize * 2)) - _containerWidth) /
                 _positionThreshold) *
-            _position);
+                _position);
 
     double padding =
         _paddingSize - ((_paddingSize / _positionThreshold) * _position);
@@ -67,8 +87,8 @@ class _DragButtonState extends State<DragButton>
         height: buttonHeight,
         decoration: BoxDecoration(
           color: Color.lerp(
-            Colors.white.withAlpha(50),
-            Colors.white.withAlpha(255),
+            widget.finalColor.withAlpha(50),
+            widget.finalColor.withAlpha(255),
             (_position / _positionThreshold) * _animationFactorOne,
           ),
           borderRadius: BorderRadius.circular(50),
@@ -84,6 +104,9 @@ class _DragButtonState extends State<DragButton>
                     _position += details.delta.dx;
                     _position = _position.clamp(0.0, _dragThreshold);
                   });
+                  if (widget.onHorizontalDragUpdate != null) {
+                    widget.onHorizontalDragUpdate!(_position);
+                  }
                 },
                 onHorizontalDragEnd: (details) {
                   if (_position < _dragThreshold) {
@@ -96,8 +119,8 @@ class _DragButtonState extends State<DragButton>
                   margin: EdgeInsets.only(left: padding, right: padding),
                   decoration: BoxDecoration(
                     color: Color.lerp(
-                      bluue,
-                      Colors.white.withAlpha(100),
+                      widget.initialColor,
+                      widget.finalColor.withAlpha(100),
                       (_position / _positionThreshold) * _animationFactorOne,
                     ),
                     shape: BoxShape.rectangle,
@@ -115,23 +138,20 @@ class _DragButtonState extends State<DragButton>
                             width: _circleDiameter,
                             decoration: BoxDecoration(
                               color: Color.lerp(
-                                bluue.withAlpha(100),
-                                Colors.white,
+                                widget.initialColor.withAlpha(100),
+                                widget.finalColor,
                                 (_position / _positionThreshold) *
                                     _animationFactorOne,
                               ),
                               shape: BoxShape.circle,
                             ),
                             child: Center(
-                              child: Icon(
-                                Icons.east_rounded,
-                                color: Color.lerp(
-                                  Colors.white,
-                                  bluue,
-                                  (_position / _positionThreshold) *
-                                      _animationFactorOne,
-                                ),
-                                size: 16,
+                              child: Image.asset(
+                                _position >= _dragThreshold
+                                    ? widget.finalImagePath
+                                    : widget.initialImagePath,
+                                width: 24,
+                                height: 24,
                               ),
                             ),
                           ),
@@ -143,12 +163,19 @@ class _DragButtonState extends State<DragButton>
               ),
             ),
             Text(
-              "Slide In",
+              _position >= _dragThreshold
+                  ? widget.finalText
+                  : widget.initialText,
               style: TextStyle(
-                color: Color.lerp(
-                  Colors.white.withAlpha(255),
-                  Colors.white.withAlpha(0),
-                  (_position * _multiplierFactorThree / _positionThreshold) *
+                color:
+                _position >= _dragThreshold
+                    ? blue
+                    : Color.lerp(
+                  widget.finalColor.withAlpha(255),
+                  widget.finalColor.withAlpha(0),
+                  (_position *
+                      _multiplierFactorThree /
+                      _positionThreshold) *
                       _animationFactorOne,
                 ),
                 fontWeight: FontWeight.bold,
@@ -160,8 +187,8 @@ class _DragButtonState extends State<DragButton>
               child: Icon(
                 Icons.keyboard_double_arrow_right_rounded,
                 color: Color.lerp(
-                  Colors.white.withAlpha(255),
-                  Colors.white.withAlpha(0),
+                  widget.finalColor.withAlpha(255),
+                  widget.finalColor.withAlpha(0),
                   (_position * _multiplierFactorOne / _positionThreshold) *
                       _animationFactorOne,
                 ),
