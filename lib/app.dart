@@ -1,4 +1,5 @@
 import 'package:etoken/assets/colors/color.dart';
+import 'package:etoken/screens/home_screen.dart';
 import 'package:etoken/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,16 +12,10 @@ class ETokenApp extends StatelessWidget {
       title: 'EToken NG',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: yellow),
+        colorScheme: ColorScheme.fromSeed(seedColor: blue),
         fontFamily: 'Inter',
       ),
-      home: WelcomeScreen()
+      home: HomeScreen()
     );
   }
 }
-
-Widget button = ClipRect(
-  child: Container(
-    decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-  ),
-);

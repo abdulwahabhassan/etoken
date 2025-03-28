@@ -9,6 +9,7 @@ class DragButton extends StatefulWidget {
   final Color initialColor;
   final Color finalColor;
   final Function(double dx)? onHorizontalDragUpdate;
+  final VoidCallback onPressed;
 
   const DragButton({
     super.key,
@@ -18,7 +19,8 @@ class DragButton extends StatefulWidget {
     required this.finalText,
     this.initialColor = blue,
     this.finalColor = Colors.white,
-    this.onHorizontalDragUpdate
+    this.onHorizontalDragUpdate,
+    required this.onPressed,
   });
 
   @override
@@ -31,8 +33,8 @@ class _DragButtonState extends State<DragButton>
   late Animation<double> _animation;
   double _position = 0.0;
   final double _containerWidth = 300.0;
-  final double _containerHeight = 54.0;
-  final double _circleDiameter = 46.0;
+  final double _containerHeight = 48.0;
+  final double _circleDiameter = 40.0;
   final double _positionThreshold = 255.0;
   final double _paddingSize = 4;
   final int _animationFactorOne = 1;
@@ -60,6 +62,9 @@ class _DragButtonState extends State<DragButton>
       setState(() {
         _position = _animation.value;
       });
+      if (widget.onHorizontalDragUpdate != null) {
+        widget.onHorizontalDragUpdate!(_position);
+      }
     });
 
     _controller.forward(from: 0.0);
@@ -69,133 +74,140 @@ class _DragButtonState extends State<DragButton>
   Widget build(BuildContext context) {
     double buttonHeight =
         _containerHeight -
-            (((_containerHeight - _circleDiameter) / _positionThreshold) *
-                _position);
+        (((_containerHeight - _circleDiameter) / _positionThreshold) *
+            _position);
 
     double buttonWidth =
         _containerWidth -
-            ((((_containerWidth + (_paddingSize * 2)) - _containerWidth) /
+        ((((_containerWidth + (_paddingSize * 2)) - _containerWidth) /
                 _positionThreshold) *
-                _position);
+            _position);
 
     double padding =
         _paddingSize - ((_paddingSize / _positionThreshold) * _position);
 
     return Center(
-      child: Container(
-        width: buttonWidth,
-        height: buttonHeight,
-        decoration: BoxDecoration(
-          color: Color.lerp(
-            widget.finalColor.withAlpha(50),
-            widget.finalColor.withAlpha(255),
-            (_position / _positionThreshold) * _animationFactorOne,
+      child: GestureDetector(
+        onTap: () {
+          if (_position >= _dragThreshold) {
+            widget.onPressed();
+          }
+        },
+        child: Container(
+          width: buttonWidth,
+          height: buttonHeight,
+          decoration: BoxDecoration(
+            color: Color.lerp(
+              widget.finalColor.withAlpha(50),
+              widget.finalColor.withAlpha(255),
+              (_position / _positionThreshold) * _animationFactorOne,
+            ),
+            borderRadius: BorderRadius.circular(50),
           ),
-          borderRadius: BorderRadius.circular(50),
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Positioned(
-              left: 0,
-              child: GestureDetector(
-                onHorizontalDragUpdate: (details) {
-                  setState(() {
-                    _position += details.delta.dx;
-                    _position = _position.clamp(0.0, _dragThreshold);
-                  });
-                  if (widget.onHorizontalDragUpdate != null) {
-                    widget.onHorizontalDragUpdate!(_position);
-                  }
-                },
-                onHorizontalDragEnd: (details) {
-                  if (_position < _dragThreshold) {
-                    _animateBack();
-                  }
-                },
-                child: Container(
-                  width: _circleDiameter + _position,
-                  height: _circleDiameter,
-                  margin: EdgeInsets.only(left: padding, right: padding),
-                  decoration: BoxDecoration(
-                    color: Color.lerp(
-                      widget.initialColor,
-                      widget.finalColor.withAlpha(100),
-                      (_position / _positionThreshold) * _animationFactorOne,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned(
+                left: 0,
+                child: GestureDetector(
+                  onHorizontalDragUpdate: (details) {
+                    setState(() {
+                      _position += details.delta.dx;
+                      _position = _position.clamp(0.0, _dragThreshold);
+                    });
+                    if (widget.onHorizontalDragUpdate != null) {
+                      widget.onHorizontalDragUpdate!(_position);
+                    }
+                  },
+                  onHorizontalDragEnd: (details) {
+                    if (_position < _dragThreshold) {
+                      _animateBack();
+                    }
+                  },
+                  child: Container(
+                    width: _circleDiameter + _position,
+                    height: _circleDiameter,
+                    margin: EdgeInsets.only(left: padding, right: padding),
+                    decoration: BoxDecoration(
+                      color: Color.lerp(
+                        widget.initialColor,
+                        widget.finalColor.withAlpha(100),
+                        (_position / _positionThreshold) * _animationFactorOne,
+                      ),
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
                     ),
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Positioned(
-                          left: _position,
-                          child: Container(
-                            height: _circleDiameter,
-                            width: _circleDiameter,
-                            decoration: BoxDecoration(
-                              color: Color.lerp(
-                                widget.initialColor.withAlpha(100),
-                                widget.finalColor,
-                                (_position / _positionThreshold) *
-                                    _animationFactorOne,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Positioned(
+                            left: _position,
+                            child: Container(
+                              height: _circleDiameter,
+                              width: _circleDiameter,
+                              decoration: BoxDecoration(
+                                color: Color.lerp(
+                                  widget.initialColor.withAlpha(100),
+                                  widget.finalColor,
+                                  (_position / _positionThreshold) *
+                                      _animationFactorOne,
+                                ),
+                                shape: BoxShape.circle,
                               ),
-                              shape: BoxShape.circle,
-                            ),
-                            child: Center(
-                              child: Image.asset(
-                                _position >= _dragThreshold
-                                    ? widget.finalImagePath
-                                    : widget.initialImagePath,
-                                width: 24,
-                                height: 24,
+                              child: Center(
+                                child: Image.asset(
+                                  _position >= _dragThreshold
+                                      ? widget.finalImagePath
+                                      : widget.initialImagePath,
+                                  width: 24,
+                                  height: 24,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Text(
-              _position >= _dragThreshold
-                  ? widget.finalText
-                  : widget.initialText,
-              style: TextStyle(
-                color:
+              Text(
                 _position >= _dragThreshold
-                    ? blue
-                    : Color.lerp(
-                  widget.finalColor.withAlpha(255),
-                  widget.finalColor.withAlpha(0),
-                  (_position *
-                      _multiplierFactorThree /
-                      _positionThreshold) *
-                      _animationFactorOne,
+                    ? widget.finalText
+                    : widget.initialText,
+                style: TextStyle(
+                  color:
+                      _position >= _dragThreshold
+                          ? blue
+                          : Color.lerp(
+                            widget.finalColor.withAlpha(255),
+                            widget.finalColor.withAlpha(0),
+                            (_position *
+                                    _multiplierFactorThree /
+                                    _positionThreshold) *
+                                _animationFactorOne,
+                          ),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
                 ),
-                fontWeight: FontWeight.bold,
-                fontSize: 12,
               ),
-            ),
-            Positioned(
-              right: 24,
-              child: Icon(
-                Icons.keyboard_double_arrow_right_rounded,
-                color: Color.lerp(
-                  widget.finalColor.withAlpha(255),
-                  widget.finalColor.withAlpha(0),
-                  (_position * _multiplierFactorOne / _positionThreshold) *
-                      _animationFactorOne,
+              Positioned(
+                right: 24,
+                child: Icon(
+                  Icons.keyboard_double_arrow_right_rounded,
+                  color: Color.lerp(
+                    widget.finalColor.withAlpha(255),
+                    widget.finalColor.withAlpha(0),
+                    (_position * _multiplierFactorOne / _positionThreshold) *
+                        _animationFactorOne,
+                  ),
+                  size: 24,
                 ),
-                size: 24,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
