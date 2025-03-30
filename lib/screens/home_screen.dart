@@ -5,13 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../widgets/transactions_list_item.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, this.title = "Home"});
 
   final String title;
 
   @override
-  State<StatefulWidget> createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -194,24 +196,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 scrollDirection: Axis.vertical,
                 padding: EdgeInsets.only(left: 16, right: 16, bottom: 8),
                 children: [
-                  _RecentTransactionsListItem(
+                  TransactionsListItem(
                     title: "Voucher 1",
                     label: "28 Mar, 2025 20:47",
                     value: "\$250,000",
                   ),
 
-                  _RecentTransactionsListItem(
-                    title: "Voucher 1",
+                  TransactionsListItem(
+                    title: "Voucher 2",
                     label: "28 Mar, 2025 20:47",
                     value: "\$1,050,000",
                   ),
-                  _RecentTransactionsListItem(
-                    title: "Voucher 1",
+                  TransactionsListItem(
+                    title: "Voucher 3",
                     label: "28 Mar, 2025 20:47",
                     value: "\$25.90",
                   ),
-                  _RecentTransactionsListItem(
-                    title: "Voucher 1",
+                  TransactionsListItem(
+                    title: "Voucher 4",
                     label: "28 Mar, 2025 20:47",
                     value: "\$25.90",
                   ),
@@ -261,7 +263,7 @@ class _DailyStatsListItem extends StatelessWidget {
             style: TextTheme.of(context).labelSmall,
           ),
           SizedBox(height: 4),
-          Text(value),
+          Text(value, style: TextTheme.of(context).bodyMedium?.copyWith(fontWeight: FontWeight.bold),),
         ],
       ),
     );
@@ -306,130 +308,4 @@ class _QuickActionsListItem extends StatelessWidget {
   }
 }
 
-class _RecentTransactionsListItem extends StatelessWidget {
-  const _RecentTransactionsListItem({
-    super.key,
-    required this.title,
-    required this.label,
-    required this.value,
-  });
 
-  final String title;
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 8),
-      child: Row(
-        children: [
-          Container(
-            padding: EdgeInsets.all(8),
-            // margin: EdgeInsets.symmetric(horizontal: 4),
-            decoration: BoxDecoration(
-              color: purple.withAlpha(50),
-              border: Border(
-                right: BorderSide(
-                  color: Colors.grey,
-                  width: .5,
-                  style: BorderStyle.none,
-                ),
-                left: BorderSide(
-                  color: Colors.grey,
-                  width: .5,
-                  style: BorderStyle.solid,
-                ),
-                top: BorderSide(
-                  color: Colors.grey,
-                  width: .5,
-                  style: BorderStyle.solid,
-                ),
-                bottom: BorderSide(
-                  color: Colors.grey,
-                  width: .5,
-                  style: BorderStyle.solid,
-                ),
-              ),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: ClipOval(
-              child: Container(
-                color: blue.withAlpha(40),
-                child: Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Image.asset(
-                    "lib/assets/images/img_voucher.png",
-                    width: 16,
-                    height: 16,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Column(
-            children: List.generate(11, (index) {
-              return Container(
-                color: index % 2 == 0 ? Colors.grey : Colors.white,
-                width: .5,
-                height: 3.4,
-              );
-            }),
-          ),
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.all(8),
-              // margin: EdgeInsets.symmetric(horizontal: 4),
-              decoration: BoxDecoration(
-                color: purple.withAlpha(50),
-                border: Border(
-                  right: BorderSide(
-                    color: Colors.grey,
-                    width: .5,
-                    style: BorderStyle.solid,
-                  ),
-                  left: BorderSide(
-                    color: Colors.grey,
-                    width: .5,
-                    style: BorderStyle.none,
-                  ),
-                  top: BorderSide(
-                    color: Colors.grey,
-                    width: .5,
-                    style: BorderStyle.solid,
-                  ),
-                  bottom: BorderSide(
-                    color: Colors.grey,
-                    width: .5,
-                    style: BorderStyle.solid,
-                  ),
-                ),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    title,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: TextTheme.of(context).labelSmall,
-                  ),
-                  SizedBox(height: 2),
-                  Text(
-                    title,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: TextTheme.of(context).labelSmall,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
