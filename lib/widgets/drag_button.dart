@@ -33,8 +33,8 @@ class _DragButtonState extends State<DragButton>
   late Animation<double> _animation;
   double _position = 0.0;
   final double _containerWidth = 300.0;
-  final double _containerHeight = 48.0;
-  final double _circleDiameter = 40.0;
+  final double _containerHeight = 46.0;
+  final double _circleDiameter = 38.0;
   final double _positionThreshold = 255.0;
   final double _paddingSize = 4;
   final int _animationFactorOne = 1;
@@ -161,8 +161,8 @@ class _DragButtonState extends State<DragButton>
                                   _position >= _dragThreshold
                                       ? widget.finalImagePath
                                       : widget.initialImagePath,
-                                  width: 24,
-                                  height: 24,
+                                  width: 16,
+                                  height: 16,
                                 ),
                               ),
                             ),
@@ -190,7 +190,7 @@ class _DragButtonState extends State<DragButton>
                                 _animationFactorOne,
                           ),
                   fontWeight: FontWeight.bold,
-                  fontSize: 12,
+                  fontSize: TextTheme.of(context).labelSmall?.fontSize,
                 ),
               ),
               Positioned(
@@ -203,7 +203,7 @@ class _DragButtonState extends State<DragButton>
                     (_position * _multiplierFactorOne / _positionThreshold) *
                         _animationFactorOne,
                   ),
-                  size: 24,
+                  size: 16,
                 ),
               ),
             ],

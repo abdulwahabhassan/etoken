@@ -88,11 +88,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 32,),
+                  SizedBox(height: 32),
                   Text(
                     "eToken",
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 22,
                       fontFamily: "Rowdies",
                       color: Colors.white,
                     ),
@@ -106,7 +106,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         textStyle: TextStyle(
                           color: Colors.white,
                           fontFamily: "Rowdies",
-                          fontSize: 14,
+                          fontSize: 12,
                         ),
                         speed: Duration(milliseconds: 150),
                         textAlign: TextAlign.center,
@@ -121,7 +121,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       color: Colors.white,
                       fontFamily: "Inter",
                       fontWeight: FontWeight.bold,
-                      fontSize: 12,
+                      fontSize: 11,
                     ),
                     textAlign: TextAlign.center,
                   ),

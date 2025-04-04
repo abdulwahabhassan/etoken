@@ -5,16 +5,18 @@ import 'package:flutter/material.dart';
 import '../assets/colors/color.dart';
 
 class VoucherDetail extends StatelessWidget {
+  final String title;
+  final String label;
+  final String value;
+  final VoidCallback? onRedeemedNowPressed;
+
   const VoucherDetail({
     super.key,
     required this.title,
     required this.label,
     required this.value,
+    this.onRedeemedNowPressed,
   });
-
-  final String title;
-  final String label;
-  final String value;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,11 @@ class VoucherDetail extends StatelessWidget {
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: purple.withAlpha(50),
-                      image: DecorationImage(image: AssetImage("lib/assets/images/img_confetti.png"), opacity: 0.1, fit: BoxFit.cover),
+                    image: DecorationImage(
+                      image: AssetImage("lib/assets/images/img_confetti.png"),
+                      opacity: 0.1,
+                      fit: BoxFit.cover,
+                    ),
                     border: Border(
                       bottom: BorderSide(
                         color: Colors.grey,
@@ -72,7 +78,7 @@ class VoucherDetail extends StatelessWidget {
                               child: Padding(
                                 padding: EdgeInsets.all(8),
                                 child: Image.asset(
-                                  "lib/assets/images/img_voucher.png",
+                                  "lib/assets/images/img_voucher_outlined.png",
                                   width: 32,
                                   height: 32,
                                   fit: BoxFit.cover,
@@ -91,7 +97,10 @@ class VoucherDetail extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
                           child: Text(
                             label,
                             overflow: TextOverflow.ellipsis,
@@ -110,7 +119,11 @@ class VoucherDetail extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 24, horizontal: 24),
                   margin: EdgeInsets.only(bottom: 12),
                   decoration: BoxDecoration(
-                    image: DecorationImage(image: AssetImage("lib/assets/images/img_confetti.png"), opacity: 0.1, fit: BoxFit.cover),
+                    image: DecorationImage(
+                      image: AssetImage("lib/assets/images/img_confetti.png"),
+                      opacity: 0.1,
+                      fit: BoxFit.cover,
+                    ),
                     color: purple.withAlpha(50),
                     border: Border(
                       right: BorderSide(
@@ -145,10 +158,11 @@ class VoucherDetail extends StatelessWidget {
                     children: [
                       Column(
                         children: [
+                          SizedBox(height: 8),
                           Image.asset(
                             "lib/assets/images/img_confetti_cone.png",
-                            width: 40,
-                            height: 40,
+                            width: 32,
+                            height: 32,
                           ),
                           SizedBox(height: 12),
                           Text(
@@ -159,7 +173,7 @@ class VoucherDetail extends StatelessWidget {
                             style: TextTheme.of(context).headlineSmall
                                 ?.copyWith(fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(height: 24),
+                          SizedBox(height: 16),
                         ],
                       ),
                       Column(
@@ -229,8 +243,9 @@ class VoucherDetail extends StatelessWidget {
                                         ),
                                         actions: [
                                           SizedBox(
-                                            height: 32,
+                                            height: 36,
                                             child: TextButton.icon(
+                                              iconAlignment: IconAlignment.end,
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },
@@ -239,12 +254,17 @@ class VoucherDetail extends StatelessWidget {
                                                 color: Colors.green,
                                                 size: 16,
                                               ),
-                                              label: Text(
-                                                "Done",
-                                                style: TextTheme.of(
-                                                  context,
-                                                ).labelSmall?.copyWith(
-                                                  color: Colors.deepPurple,
+                                              label: Padding(
+                                                padding: EdgeInsets.only(
+                                                  left: 8,
+                                                ),
+                                                child: Text(
+                                                  "Done",
+                                                  style: TextTheme.of(
+                                                    context,
+                                                  ).labelSmall?.copyWith(
+                                                    color: Colors.deepPurple,
+                                                  ),
                                                 ),
                                               ),
                                               style: TextButton.styleFrom(
@@ -315,28 +335,31 @@ class VoucherDetail extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 24),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 32,
-                        child: FilledButton(
-                          onPressed: () {},
-                          style: FilledButton.styleFrom(
-                            backgroundColor: Colors.deepPurpleAccent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
+                      if (onRedeemedNowPressed != null)
+                        SizedBox(
+                          width: double.infinity,
+                          height: 32,
+                          child: FilledButton(
+                            onPressed: onRedeemedNowPressed,
+                            style: FilledButton.styleFrom(
+                              backgroundColor: Colors.deepPurpleAccent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            child: Text(
+                              "Redeem Now",
+                              style: TextTheme.of(
+                                context,
+                              ).labelSmall?.copyWith(color: Colors.white),
                             ),
                           ),
-                          child: Text(
-                            "Redeem Now",
-                            style: TextTheme.of(
-                              context,
-                            ).labelSmall?.copyWith(color: Colors.white),
-                          ),
                         ),
-                      ),
                       SizedBox(height: 24),
                       Text(
-                        "Valid Till 26 April, 2025",
+                        onRedeemedNowPressed != null
+                            ? "Valid Till 26 April, 2025"
+                            : "No longer valid",
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: TextTheme.of(context).labelSmall,

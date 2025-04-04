@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import '../assets/colors/color.dart';
 
 class TransactionsListItem extends StatelessWidget {
+  final String title;
+  final String label;
+  final String value;
+  final VoidCallback? onPressed;
+
   const TransactionsListItem({
     super.key,
     required this.title,
     required this.label,
     required this.value,
+    this.onPressed,
   });
-
-  final String title;
-  final String label;
-  final String value;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +23,7 @@ class TransactionsListItem extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(8),
-            // margin: EdgeInsets.symmetric(horizontal: 4),
+            // padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: purple.withAlpha(50),
               border: Border(
@@ -49,16 +50,26 @@ class TransactionsListItem extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: ClipOval(
-              child: Container(
-                color: blue.withAlpha(40),
-                child: Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Image.asset(
-                    "lib/assets/images/img_voucher.png",
-                    width: 16,
-                    height: 16,
-                    fit: BoxFit.cover,
+            child: FilledButton(
+              style: FilledButton.styleFrom(
+                padding: EdgeInsets.all(8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                backgroundColor: Colors.transparent,
+              ),
+              onPressed: onPressed ?? () {},
+              child: ClipOval(
+                child: Container(
+                  color: blue.withAlpha(40),
+                  child: Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Image.asset(
+                      "lib/assets/images/img_voucher_outlined.png",
+                      width: 16,
+                      height: 16,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -74,8 +85,17 @@ class TransactionsListItem extends StatelessWidget {
             }),
           ),
           Expanded(
-            child: Container(
-                padding: EdgeInsets.all(8),
+            child: FilledButton(
+              style: FilledButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                backgroundColor: Colors.transparent,
+              ),
+              onPressed: onPressed ?? () {},
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 // margin: EdgeInsets.symmetric(horizontal: 4),
                 decoration: BoxDecoration(
                   color: purple.withAlpha(50),
@@ -116,14 +136,18 @@ class TransactionsListItem extends StatelessWidget {
                           title,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
-                          style: TextTheme.of(context).labelSmall?.copyWith(fontWeight: FontWeight.bold),
+                          style: TextTheme.of(
+                            context,
+                          ).labelSmall?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 2),
                         Text(
                           label,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
-                          style: TextTheme.of(context).labelSmall?.copyWith(fontSize: 10),
+                          style: TextTheme.of(
+                            context,
+                          ).labelSmall?.copyWith(fontSize: 10),
                         ),
                       ],
                     ),
@@ -131,9 +155,13 @@ class TransactionsListItem extends StatelessWidget {
                       value,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
-                      style: TextTheme.of(context).labelSmall?.copyWith(fontWeight: FontWeight.bold),
+                      style: TextTheme.of(
+                        context,
+                      ).labelSmall?.copyWith(fontWeight: FontWeight.bold),
                     ),
-                  ],)
+                  ],
+                ),
+              ),
             ),
           ),
         ],

@@ -12,6 +12,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final FocusNode focusNode = FocusNode();
+  final TextEditingController loginIDTextFieldController =
+      TextEditingController();
+  final TextEditingController passwordTextFieldController =
+      TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -21,6 +27,13 @@ class _LoginScreenState extends State<LoginScreen> {
         systemNavigationBarColor: lightBlue,
       ),
     );
+    requestFocus();
+  }
+
+  void requestFocus() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      FocusScope.of(context).requestFocus(focusNode);
+    });
   }
 
   @override
@@ -29,27 +42,35 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: lightBlue,
       resizeToAvoidBottomInset: false,
       body: Container(
-        padding: EdgeInsets.all(24),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 40),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Flexible(
+            Container(
+              alignment: Alignment.topLeft,
               child: Text(
-                "eToken",
+                "Login",
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 18,
                   fontFamily: "Rowdies",
                   color: Colors.black87,
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
+            SizedBox(height: 24),
+            Text(
+              "Login to redeem coupons, enjoy massive discounts and transact seamlessly",
+              style: TextTheme.of(context).labelMedium,
+            ),
+            SizedBox(height: 24),
             Flexible(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   TextField(
-                    onSubmitted: (text) {},
+                    textInputAction: TextInputAction.next,
+                    controller: loginIDTextFieldController,
                     style: TextTheme.of(context).bodyMedium,
                     cursorColor: blue.withAlpha(100),
                     decoration: InputDecoration(
@@ -60,7 +81,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ).labelSmall?.copyWith(fontWeight: FontWeight.normal),
                       fillColor: blue.withAlpha(16),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          topRight: Radius.circular(8),
+                        ),
                         borderSide: BorderSide.none,
                       ),
                       isDense: true,
@@ -68,11 +92,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       isCollapsed: true,
                       contentPadding: EdgeInsets.all(12),
                     ),
+                    focusNode: focusNode,
                   ),
-                  SizedBox(height: 24),
+                  SizedBox(height: 2),
                   TextField(
+                    textInputAction: TextInputAction.done,
                     obscureText: true,
-                    onSubmitted: (text) {},
+                    controller: passwordTextFieldController,
                     style: TextTheme.of(context).bodyMedium,
                     cursorColor: blue.withAlpha(100),
                     decoration: InputDecoration(
@@ -83,7 +109,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ).labelSmall?.copyWith(fontWeight: FontWeight.normal),
                       fillColor: blue.withAlpha(16),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(8),
+                          bottomRight: Radius.circular(8),
+                        ),
                         borderSide: BorderSide.none,
                       ),
                       isDense: true,
@@ -92,30 +121,56 @@ class _LoginScreenState extends State<LoginScreen> {
                       contentPadding: EdgeInsets.all(12),
                     ),
                   ),
-                  SizedBox(height: 40),
-                ],
-              ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (builder) => const HomeScreen()),
-                  );
-                },
-                style: FilledButton.styleFrom(
-                  backgroundColor: blue,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                  Container(
+                    height: 32,
+                    margin: EdgeInsets.symmetric(vertical: 8),
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Forgot Password?",
+                        style: TextTheme.of(context).labelSmall?.copyWith(
+                          color: blue,
+                          decoration: TextDecoration.underline,
+                          decorationColor: blue,
+                          decorationThickness: 0.5,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-                child: Text(
-                  "Login",
-                  style: TextTheme.of(
-                    context,
-                  ).labelMedium?.copyWith(color: Colors.white),
-                ),
+                  // SizedBox(height: 4),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 36,
+                    child: FilledButton(
+                      onPressed: () async {
+                        FocusScope.of(context).unfocus();
+                        await Future.delayed(Duration(seconds: 1));
+                        if (context.mounted) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (builder) => const HomeScreen(),
+                            ),
+                          );
+                        }
+                      },
+                      style: FilledButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                          side: BorderSide(color: Colors.grey, width: 1),
+                        ),
+                      ),
+                      child: Text(
+                        "Login",
+                        style: TextTheme.of(context).labelSmall?.copyWith(
+                          color: blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

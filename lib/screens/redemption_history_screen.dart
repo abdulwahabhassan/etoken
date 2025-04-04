@@ -30,9 +30,22 @@ class _RedemptionHistoryScreenState extends State<RedemptionHistoryScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ab.AppBar(title: "Redemption History",),
+            Container(
+              alignment: Alignment.topLeft,
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                "Redemption History",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: "Rowdies",
+                  color: Colors.black87,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            // SizedBox(height: 24),
             Padding(
-              padding: EdgeInsets.only(top: 24, right: 12),
+              padding: EdgeInsets.only(top: 16, right: 12),
               child: SizedBox(
                 height: 30,
                 child: Row(

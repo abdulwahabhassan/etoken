@@ -1,7 +1,7 @@
 import 'package:etoken/assets/colors/color.dart';
+import 'package:etoken/screens/result_screen.dart';
 import 'package:etoken/widgets/voucher_detail.dart';
 import 'package:flutter/material.dart';
-import '../widgets/app_bar.dart' as ab;
 
 class VoucherDetailsScreen extends StatelessWidget {
   const VoucherDetailsScreen({super.key});
@@ -12,22 +12,49 @@ class VoucherDetailsScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       backgroundColor: lightBlue,
       appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 50),
-        child: Padding(
-          padding: EdgeInsets.only(top: 40),
-          child: ab.AppBar(title: "Voucher Details"),
-        ),
-      ),
-      body: Center(child: SingleChildScrollView(
-        child:  Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-          child: VoucherDetail(
-            title: "Uber",
-            label: "Redeemable on all rides globally",
-            value: "\$200",
+        preferredSize: Size(double.infinity, 38),
+        child: Container(
+          padding: EdgeInsets.only(top: 40, left: 16, right: 16),
+          alignment: Alignment.topLeft,
+          child: Text(
+            "Voucher Details",
+            style: TextStyle(
+              fontSize: 18,
+              fontFamily: "Rowdies",
+              color: Colors.black87,
+            ),
+            textAlign: TextAlign.center,
           ),
         ),
-      ),)
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            child: Column(
+              children: [
+                Text(
+                  "Voucher is valid for redemption",
+                  style: TextTheme.of(context).labelSmall,
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 16,),
+                VoucherDetail(
+                  title: "Uber",
+                  label: "Redeemable on all rides globally",
+                  value: "\$200",
+                  onRedeemedNowPressed:
+                      () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (buildContext) => ResultScreen(),
+                        ),
+                      ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
