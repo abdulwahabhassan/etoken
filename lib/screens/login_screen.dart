@@ -1,10 +1,12 @@
-import 'package:etoken/screens/home_screen.dart';
+import 'package:etoken/dialogs/login_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../assets/colors/color.dart';
 
 class LoginScreen extends StatefulWidget {
+  // final AppNavigatorObserver appNavigatorObserver;
+
   const LoginScreen({super.key});
 
   @override
@@ -71,10 +73,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextField(
                     textInputAction: TextInputAction.next,
                     controller: loginIDTextFieldController,
-                    style: TextTheme.of(context).bodyMedium,
+                    style: TextTheme.of(context).bodySmall,
                     cursorColor: blue.withAlpha(100),
                     decoration: InputDecoration(
-                      icon: Icon(Icons.person, color: Colors.black),
+                      icon: Icon(Icons.person_pin_rounded, color: Colors.black),
                       hintText: "Enter login ID",
                       hintStyle: TextTheme.of(
                         context,
@@ -99,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     textInputAction: TextInputAction.done,
                     obscureText: true,
                     controller: passwordTextFieldController,
-                    style: TextTheme.of(context).bodyMedium,
+                    style: TextTheme.of(context).bodySmall,
                     cursorColor: blue.withAlpha(100),
                     decoration: InputDecoration(
                       icon: Icon(Icons.lock, color: Colors.black),
@@ -147,10 +149,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         FocusScope.of(context).unfocus();
                         await Future.delayed(Duration(seconds: 1));
                         if (context.mounted) {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (builder) => const HomeScreen(),
-                            ),
+                          showDialog(
+                            context: context,
+                            builder: (buildContext) => LoginDialog(),
                           );
                         }
                       },
@@ -158,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         backgroundColor: Colors.transparent,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(24),
-                          side: BorderSide(color: Colors.grey, width: 1),
+                          side: BorderSide(color: Colors.grey, width: 0.5),
                         ),
                       ),
                       child: Text(

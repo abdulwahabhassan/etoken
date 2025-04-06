@@ -38,6 +38,7 @@ dependencies:
   image_picker: ^1.1.2
   path_provider: ^2.1.5
   camera: ^0.10.5+5
+  mobile_scanner: ^3.2.0
 
 dev_dependencies:
   flutter_test:

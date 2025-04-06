@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:etoken/dialogs/coupon_code_dialog.dart';
 import 'package:flutter/material.dart';
 
 import '../assets/colors/color.dart';
@@ -37,7 +38,7 @@ class VoucherDetail extends StatelessWidget {
                     color: purple.withAlpha(50),
                     image: DecorationImage(
                       image: AssetImage("lib/assets/images/img_confetti.png"),
-                      opacity: 0.1,
+                      opacity: 0.15,
                       fit: BoxFit.cover,
                     ),
                     border: Border(
@@ -121,7 +122,7 @@ class VoucherDetail extends StatelessWidget {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("lib/assets/images/img_confetti.png"),
-                      opacity: 0.1,
+                      opacity: 0.15,
                       fit: BoxFit.cover,
                     ),
                     color: purple.withAlpha(50),
@@ -184,103 +185,7 @@ class VoucherDetail extends StatelessWidget {
                               onTap: () {
                                 showDialog(
                                   context: context,
-                                  builder:
-                                      (context) => AlertDialog(
-                                        actionsAlignment:
-                                            MainAxisAlignment.center,
-                                        title: Column(
-                                          children: [
-                                            Image.asset(
-                                              "lib/assets/images/img_confetti_spray.png",
-                                              width: 40,
-                                              height: 40,
-                                            ),
-                                            SizedBox(height: 16),
-                                            Text(
-                                              "With coupon code you enjoy massive discounts",
-                                              style: TextTheme.of(
-                                                context,
-                                              ).labelMedium?.copyWith(
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        content: TextField(
-                                          controller:
-                                              couponCodeTextFieldController,
-                                          style:
-                                              TextTheme.of(context).bodyMedium,
-                                          cursorColor: blue.withAlpha(100),
-                                          decoration: InputDecoration(
-                                            hintText: "Coupon Code",
-                                            hintStyle: TextTheme.of(
-                                              context,
-                                            ).labelSmall?.copyWith(
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                            fillColor: blue.withAlpha(16),
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              borderSide: BorderSide.none,
-                                            ),
-                                            isDense: true,
-                                            filled: true,
-                                            isCollapsed: true,
-                                            contentPadding:
-                                                EdgeInsets.symmetric(
-                                                  horizontal: 12,
-                                                  vertical: 8,
-                                                ),
-                                          ),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            8,
-                                          ),
-                                        ),
-                                        actions: [
-                                          SizedBox(
-                                            height: 36,
-                                            child: TextButton.icon(
-                                              iconAlignment: IconAlignment.end,
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              icon: Icon(
-                                                Icons.done_all,
-                                                color: Colors.green,
-                                                size: 16,
-                                              ),
-                                              label: Padding(
-                                                padding: EdgeInsets.only(
-                                                  left: 8,
-                                                ),
-                                                child: Text(
-                                                  "Done",
-                                                  style: TextTheme.of(
-                                                    context,
-                                                  ).labelSmall?.copyWith(
-                                                    color: Colors.deepPurple,
-                                                  ),
-                                                ),
-                                              ),
-                                              style: TextButton.styleFrom(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  side: BorderSide(
-                                                    width: 0.5,
-                                                    color: Colors.grey,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                  builder: (context) => CouponCodeDialog(),
                                 );
                               },
                               child: TextField(

@@ -46,6 +46,6 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-    <string>Camera access required to QR code</string>
+    <string>Camera access required to scan QR codes</string>
 </dict>
 </plist>

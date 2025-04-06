@@ -35,7 +35,7 @@ class VoucherDetailsScreen extends StatelessWidget {
               children: [
                 Text(
                   "Voucher is valid for redemption",
-                  style: TextTheme.of(context).labelSmall,
+                  style: TextTheme.of(context).labelMedium,
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 16,),
@@ -44,7 +44,7 @@ class VoucherDetailsScreen extends StatelessWidget {
                   label: "Redeemable on all rides globally",
                   value: "\$200",
                   onRedeemedNowPressed:
-                      () => Navigator.of(context).push(
+                      () => Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (buildContext) => ResultScreen(),
                         ),

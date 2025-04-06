@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../assets/colors/color.dart';
 import '../widgets/drag_button.dart';
+import 'navigator_observer.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  // final AppNavigatorObserver appNavigatorObserver;
+
   const WelcomeScreen({super.key});
 
   @override
@@ -139,7 +142,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               onPressed: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
+                    builder:
+                        (context) => LoginScreen(
+                          // appNavigatorObserver: widget.appNavigatorObserver,
+                        ),
                   ),
                 );
               },

@@ -1,8 +1,19 @@
+import 'dart:ffi';
+
 import 'package:camera/camera.dart';
+import 'package:etoken/assets/colors/color.dart';
+import 'package:etoken/screens/direct_home_screen.dart';
+import 'package:etoken/screens/navigator_observer.dart';
+import 'package:etoken/screens/tally_home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CameraScreen extends StatefulWidget {
-  const CameraScreen({super.key});
+  final String title;
+
+  // final AppNavigatorObserver appNavigatorObserver;
+
+  const CameraScreen({super.key, required this.title});
 
   @override
   State<CameraScreen> createState() => _CameraScreenState();
@@ -16,7 +27,23 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   void initState() {
     super.initState();
-    _initializeCamera();
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: black,
+      ),
+    );
+    _initializeCamera()
+        .then((value) => transition());
+  }
+
+  Future<void> transition() async {
+    await Future.delayed(Duration(seconds: 3));
+    if (context.mounted) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (buildContext) => TallyHomeScreen()),
+      );
+    }
   }
 
   Future<void> _initializeCamera() async {
@@ -55,7 +82,7 @@ class _CameraScreenState extends State<CameraScreen> {
                     right: 24,
                     child: Center(
                       child: Text(
-                        "Scan Redemption QR Code",
+                        widget.title,
                         style: TextTheme.of(context).labelMedium?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -65,7 +92,12 @@ class _CameraScreenState extends State<CameraScreen> {
                   ),
                 ],
               )
-              : Center(child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2,)),
+              : Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                  strokeWidth: 2,
+                ),
+              ),
     );
   }
 

@@ -35,19 +35,21 @@ class ResultScreen extends StatelessWidget {
               height: 36,
               child: FilledButton(
                 onPressed: () {
-                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.of(context).pop();
                 },
                 style: FilledButton.styleFrom(
-                  backgroundColor: blue,
+                  backgroundColor: Colors.transparent,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(24),
+                    side: BorderSide(color: Colors.grey, width: 0.5),
                   ),
                 ),
                 child: Text(
                   "Done",
-                  style: TextTheme.of(
-                    context,
-                  ).labelSmall?.copyWith(color: Colors.white, fontWeight: FontWeight.bold,),
+                  style: TextTheme.of(context).labelSmall?.copyWith(
+                    color: Colors.deepPurple,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
