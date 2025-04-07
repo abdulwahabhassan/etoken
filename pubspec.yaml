@@ -63,14 +63,14 @@ flutter:
   fonts:
     - family: Inter
       fonts:
-        - asset: lib/assets/fonts/Inter-VariableFont.ttf
+        - asset: lib/core/ui/theme/fonts/Inter-VariableFont.ttf
     - family: Rowdies
       fonts:
-        - asset: lib/assets/fonts/Rowdies-Bold.ttf
+        - asset: lib/core/ui/theme/fonts/Rowdies-Bold.ttf
           weight: 700
 
   assets:
-    - lib/assets/images/
+    - lib/core/ui/icons/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
