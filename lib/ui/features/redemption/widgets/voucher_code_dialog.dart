@@ -1,4 +1,6 @@
+import 'package:etoken/config/router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../common/screens/voucher_details_screen.dart';
 import '../../../common/theme/colors.dart';
@@ -104,13 +106,8 @@ class VoucherCodeDialog extends StatelessWidget {
               child: TextButton.icon(
                 iconAlignment: IconAlignment.end,
                 onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (buildContext) => VoucherDetailsScreen(),
-                    ),
-                  );
+                  context.pop();
+                  context.push(voucherDetailsRoute);
                 },
                 icon: Icon(
                   Icons.keyboard_double_arrow_right_rounded,

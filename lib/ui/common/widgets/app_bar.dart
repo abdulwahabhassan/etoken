@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 
+import 'package:go_router/go_router.dart';
+
 class ETokenAppBar extends StatelessWidget {
   final String title;
   final bool showBackButton;
@@ -26,7 +28,7 @@ class ETokenAppBar extends StatelessWidget {
           if (showBackButton)
             IconButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                context.pop();
               },
               icon: Icon(Icons.arrow_back_ios_rounded),
               iconSize: 16,

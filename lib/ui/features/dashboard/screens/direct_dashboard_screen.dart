@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:etoken/config/router.dart';
 import 'package:etoken/ui/features/dashboard/viewmodels/dircet_dashboard_screen_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../common/screens/voucher_details_screen.dart';
@@ -160,12 +162,7 @@ class _DirectDashboardScreenState extends State<DirectDashboardScreen> {
                       padding: EdgeInsets.zero,
                     ),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (buildContext) => ProfileScreen(),
-                        ),
-                      );
+                      context.push(profileRoute);
                     },
                     iconSize: 50,
                     icon: ClipOval(
@@ -240,11 +237,7 @@ class _DirectDashboardScreenState extends State<DirectDashboardScreen> {
                     height: 32,
                     child: TextButton(
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => TransactionsScreen(),
-                          ),
-                        );
+                        context.push(transactionsRoute);
                       },
                       child: Text(
                         "View more",
@@ -268,11 +261,7 @@ class _DirectDashboardScreenState extends State<DirectDashboardScreen> {
                     label: "28 Mar, 2025 20:47",
                     value: "\$250,000",
                     onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                        () => context.push(voucherDetailsRoute),
                   ),
 
                   TransactionsListItem(
@@ -280,88 +269,56 @@ class _DirectDashboardScreenState extends State<DirectDashboardScreen> {
                     label: "28 Mar, 2025 20:47",
                     value: "\$1,050,000",
                     onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                        () => context.push(voucherDetailsRoute),
                   ),
                   TransactionsListItem(
                     title: "Voucher 3",
                     label: "28 Mar, 2025 20:47",
                     value: "\$25.90",
                     onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                        () => context.push(voucherDetailsRoute),
                   ),
                   TransactionsListItem(
                     title: "Voucher 4",
                     label: "28 Mar, 2025 20:47",
                     value: "\$25.90",
                     onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                        () => context.push(voucherDetailsRoute),
                   ),
                   TransactionsListItem(
                     title: "Voucher 4",
                     label: "28 Mar, 2025 20:47",
                     value: "\$25.90",
                     onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                        () => context.push(voucherDetailsRoute),
                   ),
                   TransactionsListItem(
                     title: "Voucher 4",
                     label: "28 Mar, 2025 20:47",
                     value: "\$25.90",
                     onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                        () => context.push(voucherDetailsRoute),
                   ),
                   TransactionsListItem(
                     title: "Voucher 4",
                     label: "28 Mar, 2025 20:47",
                     value: "\$25.90",
                     onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                        () => context.push(voucherDetailsRoute),
                   ),
                   TransactionsListItem(
                     title: "Voucher 4",
                     label: "28 Mar, 2025 20:47",
                     value: "\$25.90",
                     onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                        () => context.push(voucherDetailsRoute),
                   ),
                   TransactionsListItem(
                     title: "Voucher 4",
                     label: "28 Mar, 2025 20:47",
                     value: "\$25.90",
                     onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                        () => context.push(voucherDetailsRoute),
                   ),
                 ],
               ),

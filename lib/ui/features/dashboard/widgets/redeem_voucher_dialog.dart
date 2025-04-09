@@ -1,6 +1,7 @@
+import 'package:etoken/config/router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../common/screens/qr_code_scanner_screen.dart';
 import '../../redemption/widgets/voucher_code_dialog.dart';
 
 
@@ -32,7 +33,8 @@ class RedeemVoucherDialog extends StatelessWidget {
          height: 36,
          child: FilledButton(
            onPressed: () {
-             Navigator.pop(context);
+             context.pop();
+             // Navigator.pop(context);
              showDialog(
                context: context,
                builder:
@@ -79,15 +81,17 @@ class RedeemVoucherDialog extends StatelessWidget {
          height: 36,
          child: FilledButton(
            onPressed: () {
-             Navigator.pop(context);
-             Navigator.of(context).push(
-               MaterialPageRoute(
-                 builder:
-                     (
-                     builder,
-                     ) => QRCodeScannerScreen(scanType: QRCodeScanType.voucher),
-               ),
-             );
+             context.pop();
+             // Navigator.pop(context);
+             context.push(qrCodeScannerRoute);
+             // Navigator.of(context).push(
+             //   MaterialPageRoute(
+             //     builder:
+             //         (
+             //         builder,
+             //         ) => QRCodeScannerScreen(scanType: QRCodeScanType.voucher),
+             //   ),
+             // );
            },
            style: FilledButton.styleFrom(
              backgroundColor: Colors.transparent,

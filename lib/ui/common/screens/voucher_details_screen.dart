@@ -1,5 +1,7 @@
+import 'package:etoken/config/router.dart';
 import 'package:etoken/ui/common/screens/result_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../widgets/app_bar.dart';
 import '../widgets/voucher_details_card.dart';
@@ -33,12 +35,9 @@ class VoucherDetailsScreen extends StatelessWidget {
                   title: "Uber",
                   label: "Redeemable on all rides globally",
                   value: "\$200",
-                  onRedeemedNowPressed:
-                      () => Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (buildContext) => ResultScreen(),
-                        ),
-                      ),
+                  onRedeemedNowPressed: () {
+                    context.push(resultRoute);
+                  },
                 ),
               ],
             ),

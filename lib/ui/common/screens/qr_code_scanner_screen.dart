@@ -1,7 +1,9 @@
+import 'package:etoken/config/router.dart';
 import 'package:etoken/data/repositories/user_repository.dart';
 import 'package:etoken/ui/common/screens/voucher_details_screen.dart';
 import 'package:etoken/ui/features/dashboard/viewmodels/dircet_dashboard_screen_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../features/dashboard/screens/direct_dashboard_screen.dart';
@@ -47,21 +49,12 @@ class _QRCodeScannerScreenState extends State<QRCodeScannerScreen> {
                   setState(() {
                     qrCode = code;
                   });
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder:
-                          (buildContext) => switch (widget.scanType) {
-                            QRCodeScanType.redemptionBadge =>
-                              DirectDashboardScreen(
-                                viewModel: DirectDashboardScreenViewModel(
-                                  userRepository: UserRepository(),
-                                ),
-                              ),
-                            QRCodeScanType.voucher => VoucherDetailsScreen(),
-                          },
-                    ),
-                  );
+                  switch (widget.scanType) {
+                    case QRCodeScanType.redemptionBadge:
+                      context.push(dashboardRoute);
+                    case QRCodeScanType.voucher:
+                      context.push(voucherDetailsRoute);
+                  }
                 },
                 placeholderBuilder:
                     (_, _) => Column(

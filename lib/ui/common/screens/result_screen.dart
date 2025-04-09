@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../theme/colors.dart';
 
@@ -34,7 +35,7 @@ class ResultScreen extends StatelessWidget {
               height: 36,
               child: FilledButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  context.pop();
                 },
                 style: FilledButton.styleFrom(
                   backgroundColor: Colors.transparent,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../common/theme/colors.dart';
 
@@ -55,7 +56,7 @@ class CouponCodeDialog extends StatelessWidget {
         textAlign: TextAlign.center,
         focusNode: focusNode,
         textInputAction: TextInputAction.done,
-        onSubmitted: (value) => Navigator.pop(context),
+        onSubmitted: (value) => context.pop(),
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
     );

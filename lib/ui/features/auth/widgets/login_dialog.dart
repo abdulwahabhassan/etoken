@@ -1,5 +1,7 @@
+import 'package:etoken/config/router.dart';
 import 'package:etoken/ui/features/auth/widgets/redemption_point_code_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../common/screens/qr_code_scanner_screen.dart';
 
@@ -33,7 +35,7 @@ class LoginDialog extends StatelessWidget {
           height: 36,
           child: FilledButton(
             onPressed: () {
-              Navigator.pop(context);
+              context.pop();
               showDialog(
                 context: context,
                 builder:
@@ -83,15 +85,8 @@ class LoginDialog extends StatelessWidget {
           height: 36,
           child: FilledButton(
             onPressed: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder:
-                      (
-                      builder,
-                      ) => QRCodeScannerScreen(scanType: QRCodeScanType.redemptionBadge)
-                ),
-              );
+              context.pop();
+              context.push(qrCodeScannerRoute);
             },
             style: FilledButton.styleFrom(
               backgroundColor: Colors.transparent,

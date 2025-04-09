@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class IssueVoucherDialog extends StatelessWidget {
   const IssueVoucherDialog({super.key});
@@ -30,7 +31,8 @@ class IssueVoucherDialog extends StatelessWidget {
           child: TextButton.icon(
             iconAlignment: IconAlignment.end,
             onPressed: () {
-              Navigator.pop(context);
+              context.pop();
+              // Navigator.pop(context);
             },
             icon: Icon(Icons.done_all_rounded, color: Colors.green, size: 16),
             label: Padding(
@@ -58,7 +60,7 @@ class IssueVoucherDialog extends StatelessWidget {
           child: TextButton.icon(
             iconAlignment: IconAlignment.end,
             onPressed: () {
-              Navigator.pop(context);
+              context.pop();
             },
             icon: Icon(Icons.cancel_rounded, color: Colors.red, size: 16),
             label: Padding(

@@ -1,4 +1,6 @@
+import 'package:etoken/config/router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../data/repositories/user_repository.dart';
 import '../../../common/theme/colors.dart';
@@ -80,15 +82,9 @@ class _RedemptionPointDialogState extends State<RedemptionPointCodeDialog> {
           child: TextButton.icon(
             iconAlignment: IconAlignment.end,
             onPressed: () {
-              Navigator.pop(context);
+              context.pop();
               FocusScope.of(context).unfocus();
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (buildContext) => DirectDashboardScreen(viewModel: DirectDashboardScreenViewModel(userRepository: UserRepository())),
-                  // builder: (buildContext) => TallyDashboardScreen(),
-                ),
-              );
+              context.push(dashboardRoute);
             },
             icon: Icon(
               Icons.keyboard_double_arrow_right_rounded,

@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:etoken/config/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../common/screens/voucher_details_screen.dart';
@@ -62,12 +64,12 @@ class _TallyDashboardScreenState extends State<TallyDashboardScreen> {
           icon: Icon(Icons.receipt_long, color: Colors.white),
           iconAlignment: IconAlignment.end,
           style: TextButton.styleFrom(
-              backgroundColor: Colors.deepPurpleAccent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24),
-                side: BorderSide(color: Colors.grey, width: 0.5),
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 16)
+            backgroundColor: Colors.deepPurpleAccent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(24),
+              side: BorderSide(color: Colors.grey, width: 0.5),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 16),
           ),
           label: Text(
             "Issue voucher",
@@ -76,12 +78,12 @@ class _TallyDashboardScreenState extends State<TallyDashboardScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-        )
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       appBar: PreferredSize(
         preferredSize: Size(double.infinity, 48),
-        child: ETokenAppBar(title: "Dashboard", showBackButton: false,),
+        child: ETokenAppBar(title: "Dashboard", showBackButton: false),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -126,12 +128,7 @@ class _TallyDashboardScreenState extends State<TallyDashboardScreen> {
                       padding: EdgeInsets.zero,
                     ),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (buildContext) => ProfileScreen(),
-                        ),
-                      );
+                      context.push(profileRoute);
                     },
                     iconSize: 50,
                     icon: ClipOval(
@@ -344,11 +341,7 @@ class _TallyDashboardScreenState extends State<TallyDashboardScreen> {
                     height: 32,
                     child: TextButton(
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => TransactionsScreen(),
-                          ),
-                        );
+                        context.push(transactionsRoute);
                       },
                       child: Text(
                         "View more",
@@ -371,79 +364,44 @@ class _TallyDashboardScreenState extends State<TallyDashboardScreen> {
                     title: "Voucher 1",
                     label: "28 Mar, 2025 20:47",
                     value: "\$250,000",
-                    onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                    onPressed: () => context.push(voucherDetailsRoute),
                   ),
 
                   TransactionsListItem(
                     title: "Voucher 2",
                     label: "28 Mar, 2025 20:47",
                     value: "\$1,050,000",
-                    onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                    onPressed: () => context.push(voucherDetailsRoute),
                   ),
                   TransactionsListItem(
                     title: "Voucher 3",
                     label: "28 Mar, 2025 20:47",
                     value: "\$25.90",
-                    onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                    onPressed: () => context.push(voucherDetailsRoute),
                   ),
                   TransactionsListItem(
                     title: "Voucher 4",
                     label: "28 Mar, 2025 20:47",
                     value: "\$25.90",
-                    onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                    onPressed: () => context.push(voucherDetailsRoute),
                   ),
                   TransactionsListItem(
                     title: "Voucher 4",
                     label: "28 Mar, 2025 20:47",
                     value: "\$25.90",
-                    onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                    onPressed: () => context.push(voucherDetailsRoute),
                   ),
                   TransactionsListItem(
                     title: "Voucher 4",
                     label: "28 Mar, 2025 20:47",
                     value: "\$25.90",
-                    onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                    onPressed: () => context.push(voucherDetailsRoute),
                   ),
                   TransactionsListItem(
                     title: "Voucher 4",
                     label: "28 Mar, 2025 20:47",
                     value: "\$25.90",
-                    onPressed:
-                        () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (buildContext) => VoucherDetailsScreen(),
-                          ),
-                        ),
+                    onPressed: () => context.push(voucherDetailsRoute),
                   ),
                 ],
               ),

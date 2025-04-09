@@ -1,9 +1,10 @@
 import 'dart:ui';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:etoken/ui/features/auth/screens/login_screen.dart';
+import 'package:etoken/config/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import '../../../common/theme/colors.dart';
 import '../widgets/drag_button.dart';
 
@@ -18,7 +19,6 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-
   final List<String> imageAssets = [
     "lib/ui/common/icons/img_transact.png",
     "lib/ui/common/icons/img_money_wallet.png",
@@ -141,14 +141,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               initialColor: blue,
               finalColor: Colors.white,
               onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder:
-                        (context) => LoginScreen(
-                          // appNavigatorObserver: widget.appNavigatorObserver,
-                        ),
-                  ),
-                );
+                context.push(loginRoute);
               },
             ),
             SizedBox(height: 24),
