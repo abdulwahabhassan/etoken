@@ -13,7 +13,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # Read more about Android versioning at https://developer.android.com/studio/publish/versioning
 # In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
 # Read more about iOS versioning at
-# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/commonFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
 version: 1.0.0+1
@@ -39,6 +39,8 @@ dependencies:
   path_provider: ^2.1.5
   camera: ^0.10.5+5
   mobile_scanner: ^3.2.0
+  freezed_annotation: ^3.0.0
+  json_annotation: ^4.9.0
 
 dev_dependencies:
   flutter_test:
@@ -50,27 +52,30 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  build_runner: ^2.4.15
+  freezed: ^3.0.6
+  json_serializable: ^6.9.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
-  # The following line ensures that the Material Icons font is
+  # The following line ensures that the Material90Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
   fonts:
     - family: Inter
       fonts:
-        - asset: lib/core/ui/theme/fonts/Inter-VariableFont.ttf
+        - asset: lib/ui/common/theme/fonts/Inter-VariableFont.ttf
     - family: Rowdies
       fonts:
-        - asset: lib/core/ui/theme/fonts/Rowdies-Bold.ttf
+        - asset: lib/ui/common/theme/fonts/Rowdies-Bold.ttf
           weight: 700
 
   assets:
-    - lib/core/ui/icons/
+    - lib/ui/common/icons/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

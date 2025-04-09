@@ -1,9 +1,8 @@
-import 'package:etoken/core/ui/theme/colors.dart';
-import 'package:etoken/features/welcome/presentation/screens/welcome_screen.dart';
+import 'package:etoken/ui/common/theme/colors.dart';
+import 'package:etoken/ui/features/welcome/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 class ETokenApp extends StatelessWidget {
-  // final AppNavigatorObserver appNavigatorObserver;
   const ETokenApp({super.key,});
 
   @override
