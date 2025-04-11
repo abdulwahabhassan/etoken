@@ -14,10 +14,14 @@
 
 import 'dart:async';
 
+import 'package:etoken/data/service/network_service.dart';
+
 import '../../domain/models/user.dart';
 
 class UserRepository {
-  Future<User> getUser() => Future.delayed(Duration(seconds: 3), () {
-    return User(firstname: "Hassan", lastname: "Abdulwahab");
-  });
+  final ETokenApiService _apiService;
+
+  UserRepository(this._apiService);
+
+  Future<User> getUser() => _apiService.getUser();
 }

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:etoken/config/router.dart';
+import 'package:etoken/ui/navigation/router.dart';
 import 'package:etoken/ui/features/dashboard/viewmodels/dircet_dashboard_screen_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

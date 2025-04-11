@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:etoken/config/router.dart';
+import 'package:etoken/ui/navigation/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';

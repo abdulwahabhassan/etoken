@@ -1,4 +1,4 @@
-import 'package:etoken/config/router.dart';
+import 'package:etoken/ui/navigation/router.dart';
 import 'package:etoken/data/repositories/user_repository.dart';
 import 'package:etoken/ui/common/screens/voucher_details_screen.dart';
 import 'package:etoken/ui/features/dashboard/viewmodels/dircet_dashboard_screen_viewmodel.dart';

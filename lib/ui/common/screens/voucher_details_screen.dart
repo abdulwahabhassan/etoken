@@ -1,4 +1,4 @@
-import 'package:etoken/config/router.dart';
+import 'package:etoken/ui/navigation/router.dart';
 import 'package:etoken/ui/common/screens/result_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

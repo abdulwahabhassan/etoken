@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$User implements DiagnosticableTreeMixin {
 
- String get firstname; String get lastname;
+ String get id; String get firstname; String get lastname; String get phone; String get gender; String get address; String get email;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,21 +30,21 @@ $UserCopyWith<User> get copyWith => _$UserCopyWithImpl<User>(this as User, _$ide
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'User'))
-    ..add(DiagnosticsProperty('firstname', firstname))..add(DiagnosticsProperty('lastname', lastname));
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('firstname', firstname))..add(DiagnosticsProperty('lastname', lastname))..add(DiagnosticsProperty('phone', phone))..add(DiagnosticsProperty('gender', gender))..add(DiagnosticsProperty('address', address))..add(DiagnosticsProperty('email', email));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.firstname, firstname) || other.firstname == firstname)&&(identical(other.lastname, lastname) || other.lastname == lastname));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.id, id) || other.id == id)&&(identical(other.firstname, firstname) || other.firstname == firstname)&&(identical(other.lastname, lastname) || other.lastname == lastname)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.address, address) || other.address == address)&&(identical(other.email, email) || other.email == email));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,firstname,lastname);
+int get hashCode => Object.hash(runtimeType,id,firstname,lastname,phone,gender,address,email);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'User(firstname: $firstname, lastname: $lastname)';
+  return 'User(id: $id, firstname: $firstname, lastname: $lastname, phone: $phone, gender: $gender, address: $address, email: $email)';
 }
 
 
@@ -55,7 +55,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- String firstname, String lastname
+ String id, String firstname, String lastname, String phone, String gender, String address, String email
 });
 
 
@@ -72,10 +72,15 @@ class _$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? firstname = null,Object? lastname = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? firstname = null,Object? lastname = null,Object? phone = null,Object? gender = null,Object? address = null,Object? email = null,}) {
   return _then(_self.copyWith(
-firstname: null == firstname ? _self.firstname : firstname // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,firstname: null == firstname ? _self.firstname : firstname // ignore: cast_nullable_to_non_nullable
 as String,lastname: null == lastname ? _self.lastname : lastname // ignore: cast_nullable_to_non_nullable
+as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String,address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -87,11 +92,16 @@ as String,
 @JsonSerializable()
 
 class _User with DiagnosticableTreeMixin implements User {
-  const _User({required this.firstname, required this.lastname});
+  const _User({required this.id, required this.firstname, required this.lastname, required this.phone, required this.gender, required this.address, required this.email});
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
+@override final  String id;
 @override final  String firstname;
 @override final  String lastname;
+@override final  String phone;
+@override final  String gender;
+@override final  String address;
+@override final  String email;
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
@@ -107,21 +117,21 @@ Map<String, dynamic> toJson() {
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'User'))
-    ..add(DiagnosticsProperty('firstname', firstname))..add(DiagnosticsProperty('lastname', lastname));
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('firstname', firstname))..add(DiagnosticsProperty('lastname', lastname))..add(DiagnosticsProperty('phone', phone))..add(DiagnosticsProperty('gender', gender))..add(DiagnosticsProperty('address', address))..add(DiagnosticsProperty('email', email));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.firstname, firstname) || other.firstname == firstname)&&(identical(other.lastname, lastname) || other.lastname == lastname));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.id, id) || other.id == id)&&(identical(other.firstname, firstname) || other.firstname == firstname)&&(identical(other.lastname, lastname) || other.lastname == lastname)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.address, address) || other.address == address)&&(identical(other.email, email) || other.email == email));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,firstname,lastname);
+int get hashCode => Object.hash(runtimeType,id,firstname,lastname,phone,gender,address,email);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'User(firstname: $firstname, lastname: $lastname)';
+  return 'User(id: $id, firstname: $firstname, lastname: $lastname, phone: $phone, gender: $gender, address: $address, email: $email)';
 }
 
 
@@ -132,7 +142,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- String firstname, String lastname
+ String id, String firstname, String lastname, String phone, String gender, String address, String email
 });
 
 
@@ -149,10 +159,15 @@ class __$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? firstname = null,Object? lastname = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? firstname = null,Object? lastname = null,Object? phone = null,Object? gender = null,Object? address = null,Object? email = null,}) {
   return _then(_User(
-firstname: null == firstname ? _self.firstname : firstname // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,firstname: null == firstname ? _self.firstname : firstname // ignore: cast_nullable_to_non_nullable
 as String,lastname: null == lastname ? _self.lastname : lastname // ignore: cast_nullable_to_non_nullable
+as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as String,address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

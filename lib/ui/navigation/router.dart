@@ -1,4 +1,5 @@
 import 'package:etoken/data/repositories/user_repository.dart';
+import 'package:etoken/data/service/network_service.dart';
 import 'package:etoken/ui/common/screens/qr_code_scanner_screen.dart';
 import 'package:etoken/ui/common/screens/result_screen.dart';
 import 'package:etoken/ui/common/screens/voucher_details_screen.dart';
@@ -24,7 +25,7 @@ final router = GoRouter(
   routes: [
     GoRoute(path: welcomeRoute, builder: (context, state) => WelcomeScreen()),
     GoRoute(path: loginRoute, builder: (context, state) => LoginScreen()),
-    GoRoute(path: dashboardRoute, builder: (context, state) => DirectDashboardScreen(viewModel: DirectDashboardScreenViewModel(userRepository: UserRepository()))),
+    GoRoute(path: dashboardRoute, builder: (context, state) => DirectDashboardScreen(viewModel: DirectDashboardScreenViewModel(userRepository: UserRepository(ETokenApiService())))),
     GoRoute(path: profileRoute, builder: (context, state) => ProfileScreen()),
     GoRoute(path: resultRoute, builder: (context, state) => ResultScreen()),
     GoRoute(path: voucherDetailsRoute, builder: (context, state) => VoucherDetailsScreen()),
