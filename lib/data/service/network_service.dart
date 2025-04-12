@@ -1,7 +1,16 @@
 import 'package:etoken/domain/models/user.dart';
+import 'package:dio/dio.dart';
+
+
+final _dio = Dio();
 
 class ETokenApiService {
   Future<User> getUser() async {
+    final response = await _dio.get("https://dart.dev", onReceiveProgress: (received, total) => {
+      print('recived: $received, total: $total')
+
+    });
+    print(response);
     await Future.delayed(Duration(seconds: 5));
     return Future.error(Object());
     // return User(
@@ -14,4 +23,7 @@ class ETokenApiService {
     //   email: 'devhassan.org@gmail.com',
     // );
   }
+
+
+
 }
